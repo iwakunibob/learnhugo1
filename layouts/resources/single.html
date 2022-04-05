@@ -38,11 +38,11 @@
         </div>
         <div class="col-md-6">
           <h2>.Resources.GetMatch</h2>
-          {{ $img4 := .Resources.GetMatch "images/**4*" }}
-            <figure class="figure">
-              <img src="{{ $img4.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
-              <figcaption class="figure-caption">.Resources.GetMatch</figcaption>
-            </figure>
+          {{ $img4 := .Resources.GetMatch "**3*" }}
+          <figure class="figure">
+            <img src="{{ $img4.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">.Resources.GetMatch</figcaption>
+          </figure>
         </div>
       </div>
     </div>

@@ -1,0 +1,63 @@
+{{ define "main" }}
+  <section class="main">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          {{ partial "title" . }}
+          <div class="py-3">{{ .Content | markdownify }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Image.Resize</h2>
+          <p>Aspect ratio: not preserved unless 600x or x200</p>
+          {{ $img5 := .Resources.GetMatch "**2*" }}
+          {{ $img5 = $img5.Resize "600x200" }}
+          <figure class="figure">
+            <img src="{{ $img5.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Resize to 600px x 200px</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-6">
+          <h2>Image.Fit</h2>
+          <p>Aspect ratio: preserved and fit in box</p>
+          {{ $img6 := .Resources.GetMatch "**2*" }}
+          {{ $img6 = $img6.Fit "600x200" }}
+          <figure class="figure">
+            <img src="{{ $img6.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Fit to 600px x 200px</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-6">
+          <h2>Image.Fill</h2>
+          <p>Aspect ratio: preserved and fit in box</p>
+          {{ $img7 := .Resources.GetMatch "**2*" }}
+          {{ $img7 = $img7.Fill "600x200" }}
+          <figure class="figure">
+            <img src="{{ $img7.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Fill to 600px x 200px + Anchor option</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-6">
+          <h2>Image.Crop</h2>
+          <p>Aspect ratio: preserved and fit in box</p>
+          {{ $img8 := .Resources.GetMatch "**2*" }}
+          {{ $img8 = $img8.Crop "600x200" }}
+          <figure class="figure">
+            <img src="{{ $img8.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Crop to 600px x 200px + Anchor option</figcaption>
+          </figure>.        </div>
+        <div class="col-md-6">
+          <h2>Image.Filter.GausianBlur</h2>
+          {{ $img9 := .Resources.GetMatch "**2*" }}
+          {{ $img9 = $img9.Crop "400x400" }}
+          {{ $img9 = $img9.Filter (images.GaussianBlur 6) }}
+          <figure class="figure">
+            <img src="{{ $img9.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">GausianBlur filter applied</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

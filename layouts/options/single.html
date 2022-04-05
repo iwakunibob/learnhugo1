@@ -9,53 +9,81 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <h2>Image.Resize</h2>
-          <p>Aspect ratio: not preserved unless 600x or x200</p>
-          {{ $img5 := .Resources.GetMatch "**2*" }}
-          {{ $img5 = $img5.Resize "600x200" }}
-          <figure class="figure">
-            <img src="{{ $img5.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
-            <figcaption class="figure-caption">Resize to 600px x 200px</figcaption>
-          </figure>
-        </div>
-        <div class="col-md-6">
-          <h2>Image.Fit</h2>
+          <h2>Image.Fill - Option</h2>
           <p>Aspect ratio: preserved and fit in box</p>
-          {{ $img6 := .Resources.GetMatch "**2*" }}
-          {{ $img6 = $img6.Fit "600x200" }}
-          <figure class="figure">
-            <img src="{{ $img6.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
-            <figcaption class="figure-caption">Fit to 600px x 200px</figcaption>
-          </figure>
-        </div>
-        <div class="col-md-6">
-          <h2>Image.Fill</h2>
-          <p>Aspect ratio: preserved and fit in box</p>
-          {{ $img7 := .Resources.GetMatch "**2*" }}
-          {{ $img7 = $img7.Fill "600x200" }}
+          {{ $img7 := .Resources.GetMatch "**1*" }}
+          {{ $img7 = $img7.Fill "250x250 TopRight" }}
           <figure class="figure">
             <img src="{{ $img7.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
-            <figcaption class="figure-caption">Fill to 600px x 200px + Anchor option</figcaption>
+            <figcaption class="figure-caption">Fill to 250x250 + Anchor TopRight</figcaption>
           </figure>
+          {{/* TopLeft, Top, TopRight, Left, Center,Right, BottomLeft, Bottom, BottomRight, or Smart.  */}}
         </div>
         <div class="col-md-6">
-          <h2>Image.Crop</h2>
+          <h2>Image.Crop  - Option</h2>
           <p>Aspect ratio: preserved and fit in box</p>
-          {{ $img8 := .Resources.GetMatch "**2*" }}
-          {{ $img8 = $img8.Crop "600x200" }}
+          {{ $img8 := .Resources.GetMatch "**1*" }}
+          {{ $img8 = $img8.Crop "250x250 BottomLeft" }}
           <figure class="figure">
             <img src="{{ $img8.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
-            <figcaption class="figure-caption">Crop to 600px x 200px + Anchor option</figcaption>
-          </figure>.        </div>
+            <figcaption class="figure-caption">Crop to 250x250 + Anchor BottomLeft</figcaption>
+          </figure>
+          {{/* TopLeft, Top, TopRight, Left, Center,Right, BottomLeft, Bottom, BottomRight, or Smart.  */}}
+        </div>
         <div class="col-md-6">
-          <h2>Image.Filter.GausianBlur</h2>
-          {{ $img9 := .Resources.GetMatch "**2*" }}
-          {{ $img9 = $img9.Crop "400x400" }}
-          {{ $img9 = $img9.Filter (images.GaussianBlur 6) }}
+          <h2>Image.Crop  - Option</h2>
+          <p>Aspect ratio: preserved and fit in box</p>
+          {{ $img9 := .Resources.GetMatch "**1*" }}
+          {{ $img9 = $img9.Crop "250x250 Smart" }}
           <figure class="figure">
             <img src="{{ $img9.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
-            <figcaption class="figure-caption">GausianBlur filter applied</figcaption>
+            <figcaption class="figure-caption">Crop to 250x250 + Anchor Smart</figcaption>
           </figure>
+          {{/* TopLeft, Top, TopRight, Left, Center,Right, BottomLeft, Bottom, BottomRight, or Smart  */}}
+        </div>
+        <div class="col-md-6">
+          <h2>Image.Rotate 30</h2>
+          <p>Aspect ratio: preserved and fit in box</p>
+          {{ $img1 := .Resources.GetMatch "**1*" }}
+          {{ $img1 = $img1.Resize "400x r30" }}
+          <figure class="figure">
+            <img src="{{ $img1.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Resize and rotate</figcaption>
+          </figure>
+          {{/* TopLeft, Top, TopRight, Left, Center,Right, BottomLeft, Bottom, BottomRight, or Smart  */}}
+        </div>
+        <div class="col-md-6">
+          <h2>Image.Target Format </h2>
+          <p>Aspect ratio: preserved and fit in box</p>
+          {{ $img2 := .Resources.GetMatch "**4*" }}
+          {{ $img2 = $img2.Resize "500x webp" }}
+          <figure class="figure">
+            <img src="{{ $img2.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Converted to webp resize 500x</figcaption>
+          </figure>
+          {{/*  bmp, gif, jpeg, jpg, png, tif, tiff, or webp  */}}
+        </div>
+        <div class="col-md-6">
+          <h2>WebP Hint </h2>
+          <p>Compress text image</p>
+          {{ $img3 := .Resources.GetMatch "**text*" }}
+          {{ $img3 = $img3.Resize "400x webp text" }}
+          <figure class="figure">
+            <img src="{{ $img3.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Converted text to webp resize 400x</figcaption>
+          </figure>
+          {{/*  bmp, gif, jpeg, jpg, png, tif, tiff, or webp  */}}
+        </div>
+        <div class="col-md-6">
+          <h2>Background Color</h2>
+          <p>Converting to jpg from transparent file</p>
+          {{ $img4 := .Resources.GetMatch "**transparent*" }}
+          {{ $img4 = $img4.Resize "500x jpeg #000000" }}
+          <figure class="figure">
+            <img src="{{ $img4.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Converted transparency to color</figcaption>
+          </figure>
+          {{/*  bmp, gif, jpeg, jpg, png, tif, tiff, or webp  */}}
         </div>
       </div>
     </div>

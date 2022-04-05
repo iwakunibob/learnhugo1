@@ -56,7 +56,7 @@
           <h2>Image.Target Format </h2>
           <p>Aspect ratio: preserved and fit in box</p>
           {{ $img2 := .Resources.GetMatch "**4*" }}
-          {{ $img2 = $img2.Resize "500x webp" }}
+          {{ $img2 = $img2.Resize "500x webp q85" }}
           <figure class="figure">
             <img src="{{ $img2.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
             <figcaption class="figure-caption">Converted to webp resize 500x</figcaption>
@@ -67,7 +67,7 @@
           <h2>WebP Hint </h2>
           <p>Compress text image</p>
           {{ $img3 := .Resources.GetMatch "**text*" }}
-          {{ $img3 = $img3.Resize "400x webp text" }}
+          {{ $img3 = $img3.Resize "400x webp text q85" }}
           <figure class="figure">
             <img src="{{ $img3.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
             <figcaption class="figure-caption">Converted text to webp resize 400x</figcaption>
@@ -77,10 +77,32 @@
         <div class="col-md-6">
           <h2>Background Color</h2>
           <p>Converting to jpg from transparent file</p>
-          {{ $img4 := .Resources.GetMatch "**transparent*" }}
-          {{ $img4 = $img4.Resize "500x jpeg #000000" }}
+          {{ $img4 := .Resources.GetMatch "**trans2*" }}
+          {{ $img4 = $img4.Resize "500x webp q85" }}
           <figure class="figure">
             <img src="{{ $img4.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Converted transparency to color</figcaption>
+          </figure>
+          {{/*  bmp, gif, jpeg, jpg, png, tif, tiff, or webp  */}}
+        </div>
+        <div class="col-md-12">
+          <h2>High Quality</h2>
+          <p>Converting to jpg from transparent file</p>
+          {{ $img5 := .Resources.GetMatch "**1*" }}
+          {{ $img5 = $img5.Resize "900x webp q90" }}
+          <figure class="figure">
+            <img src="{{ $img5.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Converted transparency to color</figcaption>
+          </figure>
+          {{/*  bmp, gif, jpeg, jpg, png, tif, tiff, or webp  */}}
+        </div>
+        <div class="col-md-12">
+          <h2>Low Quality</h2>
+          <p>Converting to jpg from transparent file</p>
+          {{ $img6 := .Resources.GetMatch "**1*" }}
+          {{ $img6 = $img6.Resize "900x webp q10" }}
+          <figure class="figure">
+            <img src="{{ $img6.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
             <figcaption class="figure-caption">Converted transparency to color</figcaption>
           </figure>
           {{/*  bmp, gif, jpeg, jpg, png, tif, tiff, or webp  */}}

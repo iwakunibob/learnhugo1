@@ -5,6 +5,8 @@
 # Generated files by hugo
 /public/
 /node_modules/
+# ignore resources for local builds, but remove for remote builds
+# /resources/
 /resources/_gen/
 /assets/jsconfig.json
 hugo_stats.json

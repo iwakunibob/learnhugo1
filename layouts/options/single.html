@@ -78,7 +78,7 @@
           <h2>Background Color</h2>
           <p>Converting to jpg from transparent file</p>
           {{ $img4 := .Resources.GetMatch "**trans2*" }}
-          {{ $img4 = $img4.Resize "500x webp q85" }}
+          {{ $img4 = $img4.Resize "500x webp q85 #FFFFCC" }}
           <figure class="figure">
             <img src="{{ $img4.RelPermalink }}" class="figure-img img-fluid rounded" alt="...">
             <figcaption class="figure-caption">Converted transparency to color</figcaption>

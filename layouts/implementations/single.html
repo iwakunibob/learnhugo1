@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6">
           <h2>SRCSET - Responsive</h2>
-          {{ $opts3 := (dict "page" . "src" "images/placeholder1.jpg" "widths" (slice 300 600) "sizes" "(min-width: 768px) 50vw, 100vw" "alt" "Image 200px wide outputted at 1x, 2x densities") }}
+          {{ $opts3 := (dict "page" . "src" "images/placeholder3.jpg" "widths" (slice 300 600) "sizes" "(min-width: 768px) 50vw, 100vw" "alt" "Image outputted at 200 and 300px wide") }}
           {{ partial "exercises/srcset-responsive" $opts3 }}
         </div>
       </div>

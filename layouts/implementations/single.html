@@ -18,6 +18,11 @@
           {{ $opts2 := (dict "page" . "src" "images/placeholder2.jpg" "width" 300 "densities" (slice 1 2) "alt" "Image 200px wide outputted at 1x, 2x densities") }}
           {{ partial "exercises/srcset-density" $opts2 }}
         </div>
+        <div class="col-md-6">
+          <h2>SRCSET - Responsive</h2>
+          {{ $opts3 := (dict "page" . "src" "images/placeholder1.jpg" "widths" (slice 300 600) "sizes" "(min-width: 768px) 50vw, 100vw" "alt" "Image 200px wide outputted at 1x, 2x densities") }}
+          {{ partial "exercises/srcset-responsive" $opts3 }}
+        </div>
       </div>
     </div>
   </section>

@@ -6,25 +6,26 @@
   {{- warnf "no image resource found at %s%s" .page.RelPermalink .src -}}
 {{- end -}}
 {{- /*  set variables  */ -}}
-{{- $densities := .densities | default (slice 1 2) -}}
-{{- $densities := sort $densities -}}
 {{- $src := "" -}}
 {{- $srcset := slice -}}
-{{- range $index, $density := $densities -}}
-  {{- $width := mul $.width $density -}}
+{{- $widths := sort .widths -}}
+{{- range $index, $width := .widths -}}
   {{- if gt $width $img.Width -}}
-    {{- warnf "Source image %s is not wide enough to resize to %dpx and %dx density" $img.RelPermalink $width $density -}}
+    {{- warnf "Source image %s is not wide enough to resize to %dpx" $img.RelPermalink $width -}}
   {{- end -}}
-  {{- $resized := $img.Resize (printf "%dx" $width) -}}
-  {{- $srcset = $srcset | append (printf "%s %dx" $resized.RelPermalink $density) -}}  
-  {{- if eq $density 1 -}}
-    {{- $src = $resized -}}
-  {{- end -}}
+  {{- $imgResized := $img.Resize (printf "%dx" $width) -}}
+  {{- $srcset = $srcset | append (printf "%s dw" $imgResized.RelPermalink $width) -}}
+  {{ if eq (len .widths) (add $index 1) }}
+    {{- $src = $imgResized -}}
+  {{ end }}
 {{- end -}}
+{{- $srcset = delimit $srcset ", " -}}
+
 <img 
   srcset="{{ $srcset }}"
   src="{{ $src.RelPermalink }}" 
   alt="{{ .alt }}"
   width="{{ $src.Width }}"
   height="{{ $src.Height }}"
-  class="{{ .class | default "img-fluid" }}">
+  class="{{ .class | default "img-fluid" }}"
+  sizes="{{ .sizes | default "100vw"}}">

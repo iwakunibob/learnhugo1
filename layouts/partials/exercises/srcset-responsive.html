@@ -1,7 +1,7 @@
 {{- /* set variables */ -}}
 {{- $img := .page.Resources.GetMatch .src -}}
-{{- if not $img -}}
-  {{- warnf "no image resource found at %s%s" .page.RelPermalink .src -}}
+{{- if not $img }}
+  {{- warnf "No image resource found at %s%s" .page.RelPermalink .src -}}
 {{- end -}}
 {{- $src := "" -}}
 {{- $srcset := slice -}}
@@ -10,12 +10,12 @@
 {{- /* generate images at each width */ -}}
 {{- range $index, $width := $widths -}}
   {{- if gt $width $img.Width -}}
-    {{- warnf "Source image %s is not wide enough to resize to %dpx" $img.RelPermalink $width -}}
-  {{- end -}}
-  {{- /* resize image */ -}}  
+      {{- warnf "Source image %s is not wide enough to resize to %dpx" $img.RelPermalink $width -}}
+    {{- end -}}
+  {{- /* resize image */ -}}
   {{- $imgResized := $img.Resize (printf "%dx" $width) -}}
   {{- /* add image to srcset array/slice with format "/path/image.jpg 100w" */ -}}
-  {{- $srcset = $srcset | append (printf "%s dw" $imgResized.RelPermalink $width) -}}
+  {{- $srcset = $srcset | append (printf "%s %dw" $imgResized.RelPermalink $width) -}}
   {{- /* if largest width (last iteration), add image to src variable for use as fallback */ -}}
   {{- if eq (len $widths) (add $index 1) -}}
     {{ $src = $imgResized -}}
@@ -27,8 +27,8 @@
 <img 
   srcset="{{ $srcset }}"
   src="{{ $src.RelPermalink }}" 
-  alt="{{ .alt }}"
+  alt="{{ .alt }}" 
+  height="{{ $src.Height }}" 
   width="{{ $src.Width }}"
-  height="{{ $src.Height }}"
   class="{{ .class | default "img-fluid" }}"
   sizes="{{ .sizes | default "100vw" }}">

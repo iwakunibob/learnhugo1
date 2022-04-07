@@ -15,7 +15,7 @@
     {{- warnf "Source image %s is not wide enough to resize to %dpx and %dx density" $img.RelPermalink $width $density -}}
   {{- end -}}
   {{- $resized := $img.Resize (printf "%dx" $width) -}}
-  {{- $srcset := $srcset | append (printf "%s %d" $resized.RelPermalink $density) -}  
+  {{- $srcset := $srcset | append (printf "%s %d" $resized.RelPermalink $density) -}}  
   {{- if eq $density 1 -}}
     {{- $src = $resized -}}
   {{- end -}}
@@ -23,7 +23,7 @@
 <img 
   srcset="{{ $srcset }}"
   src="{{ $src.RelPermalink }}" 
-  alt="{{ .alt }} "
+  alt="{{ .alt }}"
   width="{{ $imgResized.Width }}"
   height="{{ $imgResized.Height }}"
   class="{{ .class | default "img-fluid" }}">

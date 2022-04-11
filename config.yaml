@@ -17,6 +17,11 @@ imaging:
   anchor: Smart
   bgColor: '#ffffff'
   hint: photo
-  quality: 75
+  quality: 85
   resampleFilter: Box
 
+params:
+  image:
+    widths: [600, 900, 1300]
+    # densities: [1,2]
+    class: img-fluid

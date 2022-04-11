@@ -1,0 +1,24 @@
+{{- $title := "" -}}
+{{- $alt := "" -}}
+
+{{/*  check for named params in shortcode  */}}
+
+{{ with .PlainText }}
+  {{ $alt = . }}
+{{ end }}
+{{ with (.Title) }}
+  {{ $title = . }}
+{{ end }}
+
+{{ $dict := (dict
+  "page" .Page
+  "src" .Destination
+  "title" $title
+  "alt" $alt  
+)}}
+{{/*  Call image partial, and use for everything else  */}}
+<div class="row d-flex justify-content-center">
+  <div class="d-flex justify-content-center col-md-9" >
+    {{ partial "exercises/image" $dict }}
+  </div>
+</div>
